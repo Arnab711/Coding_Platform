@@ -1,0 +1,97 @@
+{% include "header.html" %}
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .roadmap {
+            padding: 100px;
+        }
+        .roadmap-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ccc;
+        }
+        .roadmap-arrow {
+            font-size: 36px;
+            color: #337ab7;
+            text-align: center;
+            margin: 10px 0;
+            display: block;
+        }
+        .progress {
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #008000;
+            text-align: center;
+            color: #fff;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="container roadmap">
+        <div class="roadmap-item">
+            <h5>Tries</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;">25%</div>
+            </div>
+        </div>
+        <div class="roadmap-arrow">
+            &#8595;
+        </div>
+        <div class="roadmap-item">
+            <h5>Arrays & Hashing</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%;">50%</div>
+            </div>
+        </div>
+        <div class="roadmap-arrow">
+            &#8595;
+        </div>
+        <div class="roadmap-item">
+            <h5>Two Pointers</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 75%;">75%</div>
+            </div>
+        </div>
+        <div class="roadmap-arrow">
+            &#8595;
+        </div>
+        <div class="roadmap-item">
+            <h5>Stack</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;">25%</div>
+            </div>
+        </div>
+        <div class="roadmap-arrow">
+            &#8595;
+        </div>
+        <div class="roadmap-item">
+            <h5>Binary Search</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%;">50%</div>
+            </div>
+        </div>
+        <div class="roadmap-arrow">
+            &#8595;
+        </div>
+        <div class="roadmap-item">
+            <h5>Sliding Window</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 75%;">75%</div>
+            </div>
+        </div>
+        <div class="roadmap-arrow">
+            &#8595;
+        </div>
+    </div>
+    {% include "footer.html" %}
