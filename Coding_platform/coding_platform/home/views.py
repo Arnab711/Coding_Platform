@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import CreateUserForm
+from .models import Message
 # Create your views here.
 
 
@@ -23,6 +24,12 @@ def aboutus_page(request):
 
 @login_required(login_url='login_page')
 def contact_page(request):
+    if request.method=='POST':
+        name=request.POST['name']
+        email=request.POST['email']
+        message=request.POST['message']
+        ob=Message.objects.create(name=name,email=email,message=message)
+        return redirect('index')
     return render(request,'contact.html')
 
 def register_page(request):
@@ -30,9 +37,9 @@ def register_page(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
+            us = form.cleaned_data.get('username')
+            pwd = form.cleaned_data.get('password1')
+            user = authenticate(request,username=us, password=pwd)
             login(request, user)
             return redirect('index')
     else:
