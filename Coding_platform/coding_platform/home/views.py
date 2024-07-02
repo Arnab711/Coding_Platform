@@ -7,12 +7,15 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import CreateUserForm
 from .models import Message
+from .models import Topic
 # Create your views here.
 
 
 @login_required(login_url='login_page')
 def index(request):
-    return render(request,'index.html')
+    topics = Topic.objects.all()  # Retrieve all topics
+    context = {'topics': topics}  # Add topics to context
+    return render(request, 'index.html', context)
 
 @login_required(login_url='login_page')
 def roadmap_page(request):
