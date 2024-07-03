@@ -11,5 +11,5 @@ urlpatterns = [
     path('register/', views.register_page, name='register_page'),
     path('restricted/', views.restricted_view, name='restricted'),
     path('logout/',views.logout_page, name='logout'),
-     path('questions/<int:topic_id>/', views.questions_by_topic, name='questions_by_topic'),
+     path('questions/<int:topic_id>/', views.questions_page, name='questions'),
 ]
