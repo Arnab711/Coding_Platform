@@ -7,8 +7,14 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import CreateUserForm
 from .models import Message
-from .models import Topic
+from .models import Message, Topic, Question
 # Create your views here.
+@login_required(login_url='login_page')
+def questions_by_topic(request, topic_id):
+    topic = Topic.objects.get(id=topic_id)
+    questions = Question.objects.filter(topic=topic)
+    context = {'topic': topic, 'questions': questions}
+    return render(request, 'questions_by_topic.html', context)
 
 
 @login_required(login_url='login_page')
