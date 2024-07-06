@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+        body.dark-mode {
             background-color: #222;
             color: #fff;
-            font-family: sans-serif;
-            margin: 0;
-            
-            
+        }
+        body.light-mode {
+            background-color: #fff;
+            color: #000;
         }
         .header {
             background-color: #343a40;
@@ -20,20 +22,30 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #555;
-            
+        }
+        .header.light-mode {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
         }
         .header .nav {
             display: flex;
             gap: 20px;
-            
         }
         .header .nav a {
             color: #fff;
             text-decoration: none;
             font-size: 1rem;
         }
+        .header .nav a.light-mode {
+            color: #000;
+        }
         .header .nav a:hover {
             color: #f39c12;
+        }
+        .header .signup {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .header .signup a {
             color: #fff;
@@ -48,6 +60,21 @@
             background-color: #0056b3;
             color: #fff;
         }
+        .header .signup a.light-mode {
+            color: #000;
+            background-color: #17a2b8;
+        }
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px;
+        }
+        .mode-toggle.light-mode {
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -59,8 +86,52 @@
             <a href="{% url 'aboutus_view' %}">About Us</a>
         </div>
         <div class="signup">
+            <button class="mode-toggle" onclick="toggleMode()"><i class="fas fa-sun"></i></button>
             <a href="{% url 'logout' %}">Logout</a>
         </div>
     </div>
+    <script>
+        function applyTheme(theme) {
+            const body = document.body;
+            const header = document.querySelector('.header');
+            const navLinks = document.querySelectorAll('.header .nav a');
+            const signupLink = document.querySelector('.header .signup a');
+            const modeToggleBtn = document.querySelector('.mode-toggle');
+            const modeToggleIcon = modeToggleBtn.querySelector('i');
+
+            body.classList.remove('dark-mode', 'light-mode');
+            header.classList.remove('dark-mode', 'light-mode');
+            navLinks.forEach(link => link.classList.remove('dark-mode', 'light-mode'));
+            signupLink.classList.remove('dark-mode', 'light-mode');
+            modeToggleBtn.classList.remove('dark-mode', 'light-mode');
+
+            body.classList.add(theme);
+            header.classList.add(theme);
+            navLinks.forEach(link => link.classList.add(theme));
+            signupLink.classList.add(theme);
+            modeToggleBtn.classList.add(theme);
+
+            if (theme === 'light-mode') {
+                modeToggleIcon.classList.remove('fa-moon');
+                modeToggleIcon.classList.add('fa-sun');
+            } else {
+                modeToggleIcon.classList.remove('fa-sun');
+                modeToggleIcon.classList.add('fa-moon');
+            }
+        }
+
+        function toggleMode() {
+            const theme = document.body.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
+            localStorage.setItem('theme', theme);
+            applyTheme(theme);
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
+            applyTheme(savedTheme);
+        }
+
+        window.onload = loadTheme;
+    </script>
 </body>
 </html>
